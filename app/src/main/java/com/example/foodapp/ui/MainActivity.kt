@@ -14,6 +14,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.example.foodapp.ui.screens.HomeScreen
 import com.example.foodapp.ui.screens.MealsCategoryScreen
 import com.example.foodapp.ui.screens.MealsDetailsScreen
 import com.example.foodapp.ui.theme.FoodAppTheme
@@ -40,7 +41,12 @@ class MainActivity : ComponentActivity() {
 @Composable
 private fun FoodApp() {
     val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = "destination_meals_list") {
+    NavHost(navController = navController, startDestination = "home_page") {
+        composable(route = "home_page") {
+            HomeScreen() {
+                navController.navigate("destination_meals_list")
+            }
+        }
         composable(route = "destination_meals_list") {
             MealsCategoryScreen() { navigationMealId ->
                 navController.navigate("destination_meals_details/$navigationMealId")
